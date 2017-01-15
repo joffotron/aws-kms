@@ -1,33 +1,41 @@
 package main
 
 import (
-	"fmt"
 	"os"
 
 	"github.com/joffotron/aws-kms/kms"
+
+	"fmt"
+
+	"github.com/voxelbrain/goptions"
 )
 
 func main() {
 	os.Setenv("AWS_SDK_LOAD_CONFIG", "true")
+	opts := struct {
+		Help goptions.Help `goptions:"-h, --help, description='Show this help'"`
 
-	if len(os.Args) != 3 {
-		usageAndExit()
+		goptions.Verbs
+		Encrypt struct {
+			KeyId string `goptions:"-k, --key-id, description='Key ID to encrypt with', obligatory"`
+			Input string `goptions:"-i, --input, description='Input data', obligatory"`
+		} `goptions:"encrypt"`
+
+		Decrypt struct {
+			Input string `goptions:"-i, --input, description='Input data', obligatory"`
+		} `goptions:"decrypt"`
+	}{}
+
+	goptions.ParseAndFail(&opts)
+	if len(os.Args) < 2 {
+		goptions.PrintHelp()
 	}
 
-	switch os.Args[1] {
-	case "encrypt":
-		fmt.Println(kms.Encrypt(os.Args[2]))
-	case "decrypt":
-		fmt.Println(kms.Decrypt(os.Args[2]))
-	default:
-		usageAndExit()
+	if opts.Encrypt.Input != "" {
+		fmt.Println(kms.Encrypt(opts.Encrypt.Input, opts.Encrypt.KeyId))
 	}
 
-}
-
-func usageAndExit() {
-	fmt.Println("USAGE: ")
-	fmt.Println("  aws-kms encrypt DATA")
-	fmt.Println("  aws-kms decrypt BASE64_ENCODED_DATA")
-	os.Exit(1)
+	if opts.Decrypt.Input != "" {
+		fmt.Println(kms.Decrypt(opts.Decrypt.Input))
+	}
 }

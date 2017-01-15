@@ -5,3 +5,5 @@ import:
   subpackages:
   - aws/session
   - service/kms
+- package: github.com/voxelbrain/goptions
+  version: ~2.5.11

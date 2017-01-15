@@ -9,11 +9,11 @@ import (
 	awskms "github.com/aws/aws-sdk-go/service/kms"
 )
 
-func Encrypt(data string) string {
+func Encrypt(data, keyId string) string {
 	kmsApi := kmsApi()
 	params := &awskms.EncryptInput{
 		Plaintext: []byte(data),
-		KeyId:     "TODO_INPUT",
+		KeyId:     &keyId,
 	}
 
 	encrypted, err := kmsApi.Encrypt(params)

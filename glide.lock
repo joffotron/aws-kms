@@ -1,5 +1,5 @@
-hash: 6c3ef643352b0f0ed3e3b1a5cfe592e6a4eae83d63f7768d5f63f053082f3f43
-updated: 2017-01-15T13:54:25.830977899+11:00
+hash: 1171fa269c99c62e1fbfef8f246dc256abd05102cfcbf188b7e05bebbb150a39
+updated: 2017-01-15T20:26:38.632589594+11:00
 imports:
 - name: github.com/aws/aws-sdk-go
   version: 63ce630574a5ec05ecd8e8de5cea16332a5a684d
@@ -33,4 +33,6 @@ imports:
   version: 6f66b0e091edb3c7b380f7c4f0f884274d550b67
 - name: github.com/jmespath/go-jmespath
   version: bd40a432e4c76585ef6b72d3fd96fb9b6dc7b68d
+- name: github.com/voxelbrain/goptions
+  version: 26cb8b04692384f4dc269de3b5fcf3e2ef78573e
 testImports: []
