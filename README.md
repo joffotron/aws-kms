@@ -1,6 +1,8 @@
 # aws-kms
 
-```Usage: aws-kms [global options] <verb> [verb options]
+```
+Usage: aws-kms [global options] <verb> [verb options]
+
 
 Global options:
         -h, --help   Show this help
